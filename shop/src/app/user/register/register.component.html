@@ -1,0 +1,71 @@
+<app-loader [isLoading]="isLoading"></app-loader>
+
+<form *ngIf="!isLoading" [formGroup]="form" class="register" (ngSubmit)="submitHandler()">
+    <h2>Register Form</h2>
+    <div class="imgcontainer">
+        <img src="https://cdn3.iconfinder.com/data/icons/login-5/512/LOGIN_6-512.png" alt="Avatar" class="avatar">
+    </div>
+
+    <div class="container">
+
+        <label for="email"><b>Email</b></label>
+        <input [class.input-error]="form.get('email').touched && !!form.get('email').errors" type="email"
+            placeholder="Enter valid email" name="email" formControlName="email">
+        <div>
+            <p *ngIf="form.get('email').touched && form.get('email').errors?.required" class="error">
+                *Email is required!
+            </p>
+            <p *ngIf="form.get('email').touched && form.get('email').errors?.emailValidator" class="error">
+                *Email must be a .com!
+            </p>
+        </div>
+
+        <label for="password"><b>Password</b></label>
+        <input [class.input-error]="form.get('password').touched && !!form.get('password').errors" type="password"
+            placeholder="Enter password" name="password" formControlName="password">
+        <div>
+            <p *ngIf="form.get('password').touched && form.get('password').errors?.required" class="error">
+                *Password is required!
+            </p>
+            <p *ngIf="form.get('password').touched && form.get('password').errors?.minlength" class="error">
+                *Password must be at least 6 characters!
+            </p>
+        </div>
+
+        <label for="repeatPassword"><b>RepeatPassword</b></label>
+        <input [class.input-error]="form.get('repeatPassword').touched && !!form.get('repeatPassword').errors"
+            type="password" placeholder="Repeat password" name="repeatPassword" formControlName="repeatPassword">
+        <div>
+            <p *ngIf="form.get('repeatPassword').touched && form.get('repeatPassword').errors?.required" class="error">
+                *Repeat password is required!
+            </p>
+            <p *ngIf="form.get('repeatPassword').touched && form.get('repeatPassword').errors?.rePasswordValidator"
+                class="error">
+                *Passwords must match
+            </p>
+        </div>
+
+        <label for="fistName"><b>First name</b></label>
+        <input [class.input-error]="form.get('firstName').touched && !!form.get('firstName').errors"
+            type="text" placeholder="Your first name here" name="firstName" formControlName="firstName">
+        <div>
+            <p *ngIf="form.get('firstName').touched && form.get('firstName').errors?.required" class="error">
+                *Names are required
+            </p>
+        </div>
+
+        <label for="lastName"><b>Last Name</b></label>
+        <input [class.input-error]="form.get('lastName').touched && !!form.get('lastName').errors"
+            type="text" placeholder="Your last name here" name="lastName" formControlName="lastName">
+        <div>
+            <p *ngIf="form.get('lastName').touched && form.get('lastName').errors?.required" class="error">
+                *Names are required
+            </p>
+        </div>
+
+        <button [disabled]="isLoading || form.invalid">Create new Account</button>      
+    </div>
+    <div>
+        <p>Already have an account ? <a routerLink="/login">Click here to Login</a></p>      
+    </div>
+</form>

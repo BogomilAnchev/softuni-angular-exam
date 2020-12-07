@@ -1,0 +1,22 @@
+<nav>
+    <ul>
+        <li>
+            <a routerLink="/">Home</a>
+        </li>
+        <li>
+            <a href="#news">News</a>
+        </li>
+        <li *ngIf="!isLogged" class="right">
+            <a routerLink="/register">Register</a>
+        </li>
+        <li *ngIf="!isLogged" class="right">
+            <a routerLink="/login">Login</a>
+        </li>
+        <li *ngIf="isLogged" class="right">
+            <a routerLink="/profile">Profile</a>
+        </li>
+        <li *ngIf="isLogged" class="right">
+            <a (click)="logoutHandler()">Logout</a>
+        </li>
+    </ul>
+</nav>

@@ -1,0 +1,39 @@
+<app-loader [isLoading]="isLoading"></app-loader>
+
+<form *ngIf="!isLoading" [formGroup]="form" class="login" (ngSubmit)="submitHandler()">
+    <h2>Login Form</h2>
+    <div class="imgcontainer">
+        <img src="https://cdn3.iconfinder.com/data/icons/login-5/512/LOGIN_6-512.png" alt="Avatar" class="avatar">
+    </div>
+
+    <div class="container">
+        <label for="uname"><b>Username</b></label>
+        <input [class.input-error]="form.get('email').touched && !!form.get('email').errors" type="email"
+            placeholder="Enter еmail" name="email" formControlName="email">
+        <div>
+            <p *ngIf="form.get('email').touched && form.get('email').errors?.required" class="error">
+                *Email is required!
+            </p>
+            <p *ngIf="form.get('email').touched && form.get('email').errors?.emailValidator" class="error">
+                *Email must be .com!
+            </p>
+        </div>
+
+        <label for="psw"><b>Password</b></label>
+        <input [class.input-error]="form.get('password').touched && !!form.get('password').errors" type="password"
+            placeholder="Enter пassword" name="password" formControlName="password">
+        <div>
+            <p *ngIf="form.get('password').touched && form.get('password').errors?.required" class="error">
+                *Password is required!
+            </p>
+            <p *ngIf="form.get('password').touched && form.get('password').errors?.minlength" class="error">
+                *Password must be at least 6 characters!
+            </p>
+        </div>
+
+        <button type="submit">Login</button>
+    </div>
+    <div>
+        <p>Don't have an account ? <a routerLink="/register">Click here to Register</a></p>
+    </div>
+</form>

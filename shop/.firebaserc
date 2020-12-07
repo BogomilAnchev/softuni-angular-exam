@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "angular-exam-bea50": {
+      "hosting": {
+        "shop": [
+          "angular-exam-bea50"
+        ]
+      }
+    }
+  }
+}

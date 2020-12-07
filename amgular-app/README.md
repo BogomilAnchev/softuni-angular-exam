@@ -1,1 +1,0 @@
-Angular app folder test
