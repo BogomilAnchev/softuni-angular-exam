@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { AbstractControl, ValidationErrors } from '@angular/forms';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
@@ -19,6 +19,7 @@ function emailValidator(control: AbstractControl): ValidationErrors | null {
 export class LoginComponent {
 
   isLoading = false;
+  registerErr = undefined;
 
   form: FormGroup;
 
@@ -33,9 +34,16 @@ export class LoginComponent {
     })
   }
 
-  submitHandler() {
+  async submitHandler() {
     const data = this.form.value;
-    this.auth.login(data.email, data.password);
-    this.router.navigate([''])
+    this.isLoading = true;
+    try {
+      await this.auth.login(data.email, data.password);
+      this.router.navigate([''])          
+    } catch (err) {
+      this.registerErr = err.message;     
+    } finally {
+      this.isLoading = false;
+    }   
   }
 }

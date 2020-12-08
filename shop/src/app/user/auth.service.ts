@@ -16,36 +16,14 @@ export class AuthService {
   }
 
   async register(email: string, password: string) {
-    try {
-      const newUser = await this.auth.createUserWithEmailAndPassword(email, password);
-      console.log(newUser);
-
-      return true
-    } catch (error) {
-      console.log('Sign in failed', error);
-      return false;
-    }
+    return this.auth.createUserWithEmailAndPassword(email, password);
   }
 
   async login(email: string, password: string) {
-    try {
-      const newUser = await this.auth.signInWithEmailAndPassword(email, password);
-      console.log(newUser);
-
-      return true;
-    } catch (error) {
-      console.log('Sign in failed', error);
-      return false;
-    }
+    return this.auth.signInWithEmailAndPassword(email, password);
   }
 
   async logout() {
-    try {
-      await this.auth.signOut();
-      return true;
-    } catch (error) {
-      console.log('Sign out failed', error);
-      return false;
-    }
+    return this.auth.signOut();
   }
 }

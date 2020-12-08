@@ -1,27 +1,46 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { NewsComponent } from './shared/news/news.component';
 import { ShopListComponent } from './shop/shop-list/shop-list.component';
 import { LoginComponent } from './user/login/login.component';
 import { ProfileComponent } from './user/profile/profile.component';
 import { RegisterComponent } from './user/register/register.component';
+import { AngularFireAuthGuard, redirectLoggedInTo, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
+
+const redirectToLogin = () => redirectUnauthorizedTo(['login'])
+const redirectToHome = () => redirectLoggedInTo(['home'])
 
 const routes: Routes = [
   {
     path:'',
     pathMatch: 'full',
-    component: ShopListComponent
+    redirectTo: '/home'
+  },
+  {
+    path:'home',
+    component: ShopListComponent,
   },
   {
     path: 'register',
-    component: RegisterComponent
+    component: RegisterComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectToHome }
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectToHome }
   },
   {
     path: 'profile',
-    component: ProfileComponent
+    component: ProfileComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectToLogin }
+  },
+  {
+    path: 'news',
+    component: NewsComponent
   }
 ];
 

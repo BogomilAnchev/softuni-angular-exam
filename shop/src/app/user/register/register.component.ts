@@ -28,7 +28,8 @@ export class RegisterComponent {
   form: FormGroup;
 
   isLoading = false;
-
+  registerErr = undefined;
+  
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
@@ -46,9 +47,16 @@ export class RegisterComponent {
     })
   }
 
-  submitHandler(): void {
+  async submitHandler() {
     const data = this.form.value;
-    this.auth.register(data.email, data.password)
-    this.router.navigate([''])
+    this.isLoading = true;
+    try {
+      await this.auth.register(data.email, data.password);
+      this.router.navigate([''])        
+    } catch (err) {
+      this.registerErr = err.message;     
+    } finally {
+      this.isLoading = false;
+    }   
   }
 }

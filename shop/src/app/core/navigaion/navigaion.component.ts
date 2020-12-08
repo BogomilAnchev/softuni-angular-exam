@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/user/auth.service';
@@ -8,11 +8,10 @@ import { AuthService } from 'src/app/user/auth.service';
   templateUrl: './navigaion.component.html',
   styleUrls: ['./navigaion.component.css']
 })
-export class NavigaionComponent implements OnInit {
+export class NavigaionComponent implements OnDestroy {
 
   public authUser: Subscription
   isLogged = false
-  test = 'test'
 
   constructor(private auth: AuthService, private router: Router) { 
     this.authUser = this.auth.userData.subscribe(user => {
@@ -24,11 +23,16 @@ export class NavigaionComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void {
+  ngOnDestroy(): void {
+    if (this.authUser) this.authUser.unsubscribe()
   }
 
-  logoutHandler(): void {
-    this.auth.logout()
-    this.router.navigate(['login'])
+  async logoutHandler() {
+    try {
+      await this.auth.logout()     
+      this.router.navigate(['login'])
+    } catch (err) {
+      console.log(err);     
+    }  
   }
 }
