@@ -1,1 +1,3 @@
-<p>MAIN SHOP PAGE HERE!</p>
+<div *ngIf="!currUser">MAIN SHOP PAGE HERE!</div>
+<div *ngIf="currUser">LOGGED IN USER</div>
+{{currUser}}

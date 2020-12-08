@@ -1,6 +1,6 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { AuthService } from 'src/app/user/auth.service';
 
 @Component({
@@ -10,29 +10,35 @@ import { AuthService } from 'src/app/user/auth.service';
 })
 export class NavigaionComponent implements OnDestroy {
 
-  public authUser: Subscription
-  isLogged = false
+  public currUser: String
+  public userAuth: Subscription;
+  public isLogged: boolean = false
 
-  constructor(private auth: AuthService, private router: Router) { 
-    this.authUser = this.auth.userData.subscribe(user => {
-      if (user) {
-        this.isLogged = true
-      } else {
-        this.isLogged = false
+  constructor(private auth: AuthService, private router: Router) {
+    this.isLogged = this.auth.isLogged
+    console.log(this.isLogged);
+    
+    this.userAuth = this.auth.signedIn.subscribe({
+      next: (user) => {
+        if (user) this.currUser = user.email
+        if (!user) this.currUser = undefined
+      },
+      error: (err) => {
+        console.log(err);
       }
-    })
+    });
   }
 
   ngOnDestroy(): void {
-    if (this.authUser) this.authUser.unsubscribe()
+    this.userAuth.unsubscribe()
   }
 
   async logoutHandler() {
     try {
-      await this.auth.logout()     
+      await this.auth.logout()
       this.router.navigate(['login'])
     } catch (err) {
-      console.log(err);     
-    }  
+      console.log(err);
+    }
   }
 }

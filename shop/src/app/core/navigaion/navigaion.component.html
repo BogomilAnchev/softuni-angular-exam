@@ -4,19 +4,21 @@
             <a routerLink="/">Home</a>
         </li>
         <li>
-            <a href="/news">News</a>
+            <a routerLink="/news">News</a>
         </li>
-        <li *ngIf="!isLogged" class="right">
+        <li *ngIf="!currUser" class="right">
             <a routerLink="/register">Register</a>
         </li>
-        <li *ngIf="!isLogged" class="right">
+        <li *ngIf="!currUser" class="right">
             <a routerLink="/login">Login</a>
         </li>
-        <li *ngIf="isLogged" class="right">
-            <a routerLink="/profile">Profile</a>
-        </li>
-        <li *ngIf="isLogged" class="right">
+        <li *ngIf="currUser" class="right">
             <a (click)="logoutHandler()">Logout</a>
+        </li>
+        <li *ngIf="currUser" class="right">
+            <a routerLink="/profile">Welcome, {{currUser}}</a>
         </li>
     </ul>
 </nav>
+
+{{isLogged}}

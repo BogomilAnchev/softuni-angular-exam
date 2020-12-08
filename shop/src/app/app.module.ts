@@ -10,6 +10,8 @@ import { environment } from '../environments/environment';
 import { SharedModule } from './shared/shared.module'
 import { CoreModule } from './core/core.module';
 import { UserModule } from './user/user.module';
+import { ShopModule } from './shop/shop.module';
+import { AuthService } from './user/auth.service';
 
 @NgModule({
   declarations: [
@@ -21,9 +23,10 @@ import { UserModule } from './user/user.module';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     SharedModule,
     CoreModule,
-    UserModule
+    UserModule,
+    ShopModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [
     AppComponent,
   ]

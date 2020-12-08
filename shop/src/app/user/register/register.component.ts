@@ -50,8 +50,12 @@ export class RegisterComponent {
   async submitHandler() {
     const data = this.form.value;
     this.isLoading = true;
+    this.registerErr = undefined;
     try {
-      await this.auth.register(data.email, data.password);
+      let user = await this.auth.register(data.email, data.password);
+      await user.user.updateProfile({
+        displayName: `${data.firstName} ${data.lastName}` 
+      })
       this.router.navigate([''])        
     } catch (err) {
       this.registerErr = err.message;     

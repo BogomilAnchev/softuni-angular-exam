@@ -6,19 +6,21 @@ import { LoginComponent } from './user/login/login.component';
 import { ProfileComponent } from './user/profile/profile.component';
 import { RegisterComponent } from './user/register/register.component';
 import { AngularFireAuthGuard, redirectLoggedInTo, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
+import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
 
 const redirectToLogin = () => redirectUnauthorizedTo(['login'])
 const redirectToHome = () => redirectLoggedInTo(['home'])
 
 const routes: Routes = [
   {
-    path:'',
+    path: '',
     pathMatch: 'full',
     redirectTo: '/home'
   },
   {
-    path:'home',
+    path: 'home',
     component: ShopListComponent,
+    canActivate: [],
   },
   {
     path: 'register',
@@ -41,6 +43,10 @@ const routes: Routes = [
   {
     path: 'news',
     component: NewsComponent
+  },
+  {
+    path: '**',
+    component: PageNotFoundComponent
   }
 ];
 

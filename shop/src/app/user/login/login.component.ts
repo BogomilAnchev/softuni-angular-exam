@@ -19,7 +19,7 @@ function emailValidator(control: AbstractControl): ValidationErrors | null {
 export class LoginComponent {
 
   isLoading = false;
-  registerErr = undefined;
+  loginErr = undefined;
 
   form: FormGroup;
 
@@ -37,11 +37,12 @@ export class LoginComponent {
   async submitHandler() {
     const data = this.form.value;
     this.isLoading = true;
+    this.loginErr = undefined
     try {
       await this.auth.login(data.email, data.password);
       this.router.navigate([''])          
     } catch (err) {
-      this.registerErr = err.message;     
+      this.loginErr = err.message;     
     } finally {
       this.isLoading = false;
     }   
