@@ -7,9 +7,10 @@ import { ProfileComponent } from './user/profile/profile.component';
 import { RegisterComponent } from './user/register/register.component';
 import { AngularFireAuthGuard, redirectLoggedInTo, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
-import { map } from 'rxjs/operators';
 import { DetailsComponent } from './shop/details/details.component';
 import { CreateComponent } from './shop/create/create.component';
+import { map } from 'rxjs/operators';
+import { AdminGuard } from './shared/admin.guard';
 
 const redirectToLogin = () => redirectUnauthorizedTo(['login'])
 const redirectToHome = () => redirectLoggedInTo(['home'])
@@ -53,6 +54,8 @@ const routes: Routes = [
   {
     path: 'create',
     component: CreateComponent,
+    canActivate: [AngularFireAuthGuard, AdminGuard],
+    data: { authGuardPipe: redirectToLogin, isAdmin: true }
   },
   {
     path: '**',

@@ -1,6 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
 import { AuthService } from 'src/app/user/auth.service';
 
 @Component({
@@ -16,6 +15,8 @@ export class NavigaionComponent {
   constructor(public auth: AuthService, public router: Router) {
     auth.authState(user => {
       let email = user?.email
+      console.log(user);
+      
       if (user) this.currUser = email;
       if (!user) this.currUser = undefined;
       if (email == 'bogomilanchev@gmail.com') {
