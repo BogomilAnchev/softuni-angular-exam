@@ -1,0 +1,49 @@
+.box {
+    border: 2px solid #333;
+    border-radius: 20%;
+    margin: 0 auto;
+    width: 50%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+h1 {
+    text-align: center;
+    font-size: 52px;
+}
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 300px;
+  }
+
+.price {
+    text-align: center;
+    font-size: 52px;
+}
+
+.desc {
+    text-align: center;
+    font-size: 32px;
+}
+
+.btns {
+    display: flex;
+    justify-content: center;
+}
+
+a {
+    margin: 10px;
+    background-color: #333;
+    border-radius: 5px;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#admin {
+    color: lightsalmon
+  }

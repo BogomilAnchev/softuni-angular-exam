@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NavigaionComponent } from './navigaion/navigaion.component';
 import { FooterComponent } from './footer/footer.component';
 import { RouterModule } from '@angular/router';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -13,11 +14,12 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    SharedModule
   ],
   exports: [
     NavigaionComponent,
-    FooterComponent
+    FooterComponent,
   ]
 })
 export class CoreModule { }

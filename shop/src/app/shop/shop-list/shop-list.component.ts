@@ -1,25 +1,28 @@
-import { Component } from '@angular/core';
-import { AuthService } from 'src/app/user/auth.service';
+import { Component, OnInit } from '@angular/core';
+import { ProductsService } from '../products.service';
 
 @Component({
   selector: 'app-shop-list',
   templateUrl: './shop-list.component.html',
   styleUrls: ['./shop-list.component.css']
 })
-export class ShopListComponent {
+export class ShopListComponent implements OnInit{
 
-  currUser
-  test = 1
+  products
 
-  constructor(public auth: AuthService) {
-    this.auth.authState(user => {
-      if (user) {
-        this.currUser = user.email
-      } else {
-        console.log('loggedOut');
-        this.currUser = undefined
-      }
-    })
+  constructor(public productService: ProductsService) {
+       
   }
 
+  ngOnInit() {
+    this.productService.getProducts().subscribe(data => {
+      this.products = data.map(item => {
+        let info = item.payload.doc.data();
+        return {
+          id: item.payload.doc.id,
+          info
+        }
+      })
+    })
+  }
 }

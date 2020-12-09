@@ -19,6 +19,8 @@ input {
   border: 1px solid #ccc;
   box-sizing: border-box;
   border-radius: 5px;
+  font-family: inherit;
+  font-size: 18px;
 }
 
 button {

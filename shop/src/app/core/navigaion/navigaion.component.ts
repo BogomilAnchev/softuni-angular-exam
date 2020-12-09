@@ -8,29 +8,24 @@ import { AuthService } from 'src/app/user/auth.service';
   templateUrl: './navigaion.component.html',
   styleUrls: ['./navigaion.component.css']
 })
-export class NavigaionComponent implements OnDestroy {
+export class NavigaionComponent {
 
-  public currUser: String
-  public userAuth: Subscription;
-  public isLogged: boolean = false
+  public currUser: string
+  public isAdmin: boolean = false
 
-  constructor(private auth: AuthService, private router: Router) {
-    this.isLogged = this.auth.isLogged
-    console.log(this.isLogged);
-    
-    this.userAuth = this.auth.signedIn.subscribe({
-      next: (user) => {
-        if (user) this.currUser = user.email
-        if (!user) this.currUser = undefined
-      },
-      error: (err) => {
-        console.log(err);
+  constructor(public auth: AuthService, public router: Router) {
+    auth.authState(user => {
+      let email = user?.email
+      if (user) this.currUser = email;
+      if (!user) this.currUser = undefined;
+      if (email == 'bogomilanchev@gmail.com') {
+        this.currUser = 'Administrator!!!'
+        this.isAdmin = true
+      } else {
+        this.currUser = email;
+        this.isAdmin = false
       }
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.userAuth.unsubscribe()
+    })
   }
 
   async logoutHandler() {

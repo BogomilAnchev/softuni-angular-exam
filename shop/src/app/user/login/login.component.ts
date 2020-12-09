@@ -42,7 +42,12 @@ export class LoginComponent {
       await this.auth.login(data.email, data.password);
       this.router.navigate([''])          
     } catch (err) {
-      this.loginErr = err.message;     
+      if (err.message === 'The password is invalid or the user does not have a password.') {
+        this.loginErr = 'The password is invalid!'
+      };
+      if (err.message === 'There is no user record corresponding to this identifier. The user may have been deleted.') {
+        this.loginErr = 'Invalid email!'
+      }   
     } finally {
       this.isLoading = false;
     }   

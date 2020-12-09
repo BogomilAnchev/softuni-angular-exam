@@ -11,7 +11,8 @@ form {
 h2 {
     text-align: center;
 }
-input {
+input, textarea {
+  font-family: inherit;
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -19,7 +20,6 @@ input {
   border: 1px solid #ccc;
   box-sizing: border-box;
   border-radius: 5px;
-  font-family: inherit;
   font-size: 18px;
 }
 
@@ -74,6 +74,7 @@ p {
 .dberr {
   font-size: x-large;
 }
+
 
 /* Change styles for span and cancel button on extra small screens */
 @media screen and (max-width: 300px) {

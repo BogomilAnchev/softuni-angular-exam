@@ -1,0 +1,15 @@
+<div class="box">
+    <h1>{{product.name}}</h1>
+    <img class="cube" src="https://www.silabg.com/uf/product/2945_pm_100protein.png">
+    <div class="details">
+        <p class="price"><span>Price:</span> {{product.price}} $</p>
+        <p class="desc"><span>Description:</span></p>
+        <div class="btns">
+            <a routerLink="/">Back to main</a>
+            <a *ngIf="!currUser" class="btn" routerLink="/login">Login to buy</a>
+            <a *ngIf="currUser && !isAdmin" class="btn">Add to Card</a>
+            <a *ngIf="currUser && isAdmin" id="admin" routerLink="/Edit">Edit</a>
+            <a *ngIf="currUser && isAdmin" id="admin" (click)="deleteHandler()">Delete</a>
+        </div>
+    </div>
+</div>

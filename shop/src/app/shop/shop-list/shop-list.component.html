@@ -1,3 +1,15 @@
-<div *ngIf="!currUser">MAIN SHOP PAGE HERE!</div>
-<div *ngIf="currUser">LOGGED IN USER</div>
-{{currUser}}
+<div class="search">
+    <input placeholder="Search items">
+</div>
+
+<div class="layout">
+    <div *ngFor="let prod of products" class="card">
+
+        <img src="https://www.silabg.com/uf/product/2945_pm_100protein.png">
+
+        <h3>{{prod.info.name}}</h3>
+        <p class="price">{{prod.info.price}} $</p>
+        <p><a routerLink="/details/{{prod.id}}">Details</a></p>
+    </div>
+    <div class="card">
+</div>

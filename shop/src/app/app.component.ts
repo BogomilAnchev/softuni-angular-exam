@@ -16,12 +16,7 @@ export class AppComponent implements OnInit {
     router.events.pipe(filter(e => e instanceof NavigationEnd)).subscribe(() => {
       const c = this. outlet.component;
     });
-    auth.currUser.then(user => {
-      console.log(user);
-      
-      if (user) auth.isLogged = true
-      if (!user) auth.isLogged = false
-    })
+    
   }
 
   ngOnInit() {

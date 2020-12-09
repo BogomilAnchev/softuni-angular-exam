@@ -1,28 +1,19 @@
-import { applySourceSpanToStatementIfNeeded } from '@angular/compiler/src/output/output_ast';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { AngularFireAuth } from "@angular/fire/auth";
-import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { first } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  public signedIn: Observable<any>;
-  public isLogged: boolean = false;
-
   constructor(private auth: AngularFireAuth) {
 
-    this.signedIn = new Observable((subscriber) => {
-      this.auth.onAuthStateChanged(subscriber);
-    });
-    
   }
 
-  authState = this.auth.onAuthStateChanged
+  getUser = this.auth.authState.pipe(first()).toPromise()
 
-  currUser = this.auth.currentUser
+  authState = this.auth.onAuthStateChanged
 
   register(email: string, password: string) {
     return this.auth.createUserWithEmailAndPassword(email, password);

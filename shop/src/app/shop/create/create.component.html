@@ -1,0 +1,66 @@
+<app-loader [isLoading]="isLoading"></app-loader>
+
+<form *ngIf="!isLoading" [formGroup]="form" class="register" (ngSubmit)="submitHandler()">
+    <h2>Create new product Form</h2>
+    <div class="imgcontainer">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUtDqj2pE6xes1d3wMmJYGsRMeNOG_RZN-Sg&usqp=CAU" alt="Avatar" class="avatar">
+    </div>
+
+    <div class="container">
+
+        <label for="title"><b>Title</b></label>
+        <input [class.input-error]="form.get('title').touched && !!form.get('title').errors" type="title"
+            placeholder="Enter valid title" name="title" formControlName="title">
+        <div>
+            <p *ngIf="form.get('title').touched && form.get('title').errors?.required" class="error">
+                *Title is required!
+            </p>
+            <p *ngIf="form.get('title').touched && form.get('title').errors?.minlength" class="error">
+                *Title should be at least 6 chars long!
+            </p>
+        </div>
+
+        <label for="price"><b>Price</b></label>
+        <input [class.input-error]="form.get('price').touched && !!form.get('price').errors" type="price"
+            placeholder="How much?" name="price" formControlName="price">
+        <div>
+            <p *ngIf="form.get('price').touched && form.get('price').errors?.required" class="error">
+                *price is required!
+            </p>
+            <p *ngIf="form.get('price').touched && form.get('price').errors?.checkPrice" class="error">
+                *Price should be a number
+            </p>
+        </div>
+
+        <label for="imageUrl"><b>ImageUrl</b></label>
+        <input [class.input-error]="form.get('imageUrl').touched && !!form.get('imageUrl').errors"
+            type="imageUrl" placeholder="Image URL here" name="imageUrl" formControlName="imageUrl">
+        <div>
+            <p *ngIf="form.get('imageUrl').touched && form.get('imageUrl').errors?.required" class="error">
+                *ImageUrl is required!
+            </p>
+            <p *ngIf="form.get('imageUrl').touched && form.get('imageUrl').errors?.checkUrl"
+                class="error">
+                *ImageUrl should be a valid URL
+            </p>
+        </div>
+
+        <label for="description"><b>Description</b></label>
+        <textarea [class.input-error]="form.get('description').touched && !!form.get('description').errors"
+            type="text" rows="4" cols="50" placeholder="It is about..." name="description" formControlName="description">dsadasdas</textarea>
+        <div>
+            <p *ngIf="form.get('description').touched && form.get('description').errors?.required" class="error">
+                *Description is required
+            </p>
+            <p *ngIf="form.get('description').touched && form.get('description').errors?.minlength" class="error">
+                *Description should be at least 50 chars long!
+            </p>
+        </div>
+
+        <button [disabled]="isLoading || form.invalid">Create new Product</button>      
+    </div>
+    <div>
+        <p>Already have an account ? <a routerLink="/login">Click here to Login</a></p>
+        
+    </div>
+</form>
