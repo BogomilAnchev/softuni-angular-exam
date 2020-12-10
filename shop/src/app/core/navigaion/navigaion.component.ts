@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/user/user.service';
 
@@ -7,15 +7,16 @@ import { UserService } from 'src/app/user/user.service';
   templateUrl: './navigaion.component.html',
   styleUrls: ['./navigaion.component.css']
 })
-export class NavigaionComponent {
+export class NavigaionComponent implements OnInit {
 
   public currUser: string
   public isAdmin: boolean = false
+  public sub
 
 
   constructor(public user: UserService, public router: Router) {
     
-    user.authState(user => {
+    this.sub = user.authState(user => {
       let email = user?.email    
       if (user) this.currUser = email;
       if (!user) this.currUser = undefined;
@@ -29,6 +30,10 @@ export class NavigaionComponent {
     })
   }
 
+  ngOnInit() {
+    
+  }
+
   async logoutHandler() {
     try {
       await this.user.logout()
@@ -37,4 +42,8 @@ export class NavigaionComponent {
       console.log(err);
     }
   }
+
+  /* ngOnDestroy() {
+    this.sub.unsubscribe()
+  } */
 }

@@ -11,6 +11,8 @@ export class UserService {
   constructor(public auth: AngularFireAuth, public fireStore: AngularFirestore) {
   }
 
+  currUser = this.auth.currentUser
+
   authState = this.auth.onAuthStateChanged
 
   register(email: string, password: string) {

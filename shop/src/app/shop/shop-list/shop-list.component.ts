@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ProductsService } from '../products.service';
 
 @Component({
@@ -6,16 +6,17 @@ import { ProductsService } from '../products.service';
   templateUrl: './shop-list.component.html',
   styleUrls: ['./shop-list.component.css']
 })
-export class ShopListComponent implements OnInit{
+export class ShopListComponent implements OnInit, OnDestroy{
 
-  products
+  public products
+  public sub
 
   constructor(public productService: ProductsService) {
        
   }
 
   ngOnInit() {
-    this.productService.getProducts().subscribe(data => {
+    this.sub = this.productService.getProducts().subscribe(data => {
       this.products = data.map(item => {
         let info = item.payload.doc.data();
         return {
@@ -24,5 +25,9 @@ export class ShopListComponent implements OnInit{
         }
       })
     })
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe()
   }
 }
