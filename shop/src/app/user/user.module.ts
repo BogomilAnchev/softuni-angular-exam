@@ -7,7 +7,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { SharedModule } from '../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { AuthService } from './auth.service';
+import { UserService } from './user.service';
 
 
 @NgModule({
@@ -17,7 +17,7 @@ import { AuthService } from './auth.service';
     ProfileComponent
   ],
   providers: [
-    AuthService
+    UserService
   ],
   imports: [
     CommonModule,

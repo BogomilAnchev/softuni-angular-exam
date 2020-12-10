@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth.service';
+import { UserService } from '../user.service';
 
 function emailValidator(control: AbstractControl): ValidationErrors | null {
   const value = (control.value as string);
@@ -26,7 +26,7 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    public auth: AuthService,
+    public auth: UserService,
   ) {
     this.form = this.fb.group({
       email: ['', [Validators.required, emailValidator]],

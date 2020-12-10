@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from 'src/app/user/auth.service';
+import { UserService } from 'src/app/user/user.service';
 import { ProductsService } from '../products.service';
 
 @Component({
@@ -15,28 +15,42 @@ export class DetailsComponent implements OnInit {
   public currUser: string
   public isAdmin: boolean = false
   public isLoading: boolean = false
-  public isEdit: boolean = true
   public toggleEdit: boolean = false
+  public userCart
 
   constructor(
     public productService: ProductsService,
     public activatedRoute: ActivatedRoute,
-    public auth: AuthService,
+    public auth: UserService,
     public router: Router
   ) {
 
     this.productId = activatedRoute.snapshot.params.id;
 
     auth.authState(user => {
-      let email = user.email
-      if (user) this.currUser = email;
-      if (!user) this.currUser = undefined;
-      if (email == 'bogomilanchev@gmail.com') this.isAdmin = true
-      if (email != 'bogomilanchev@gmail.com') this.isAdmin = false
+      let email = user?.email
+      if (user) {
+        this.currUser = email;
+        this.auth
+          .getCart(this.currUser)
+          .then(cart => {
+            this.userCart = cart.data()
+          })
+          .catch(err => console.log(err));
+      }
+
+      if (!user) {
+        this.userCart = [];
+        this.currUser = undefined
+      }
+
+      email == 'bogomilanchev@gmail.com' ? this.isAdmin = true : this.isAdmin = false
+
     })
   }
 
   ngOnInit(): void {
+
     this.isLoading = true
     this.productService
       .getProduct(this.productId)
@@ -54,5 +68,26 @@ export class DetailsComponent implements OnInit {
 
   edit() {
     this.toggleEdit = !this.toggleEdit
+  }
+
+  addToCart() {
+    let currProdId = this.productId;
+    let currCart = this.userCart.cart.cart
+
+    let indexIfExisting = currCart.findIndex(prod => prod.id == currProdId)
+
+    if (indexIfExisting >= 0) {
+      currCart[indexIfExisting].qty++
+    } else {
+      this.product.id = this.productId;
+      this.product.qty = 1
+      currCart.push(this.product)
+    }
+ 
+    this.auth.setCart(this.currUser, currCart)
+      .then(res => {
+        this.router.navigate(['profile'])
+      })
+      .catch(err => console.log(err));
   }
 }

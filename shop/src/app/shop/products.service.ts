@@ -25,6 +25,7 @@ export class ProductsService {
   deleteProduct(productId) {
     this.firestore.doc('products/' + productId).delete();
   }
+  
   updateProduct(productId, product) {
     return this.firestore.doc('products/' + productId).update(product);
   }

@@ -8,12 +8,12 @@
         <div class="desc">{{product.description}}</div>
         <div class="btns">
             <a routerLink="/">Back to Main</a>
-            <a *ngIf="!currUser" class="btn" routerLink="/login">Login to Buy</a>
-            <a *ngIf="currUser && !isAdmin" class="btn">Add to Cart</a>
+            <a *ngIf="!currUser" routerLink="/login">Login to Buy</a>
+            <a *ngIf="currUser && !isAdmin" (click)="addToCart()">Add to Cart</a>
             <a *ngIf="currUser && isAdmin" id="admin" (click)="edit()">Edit</a>
             <a *ngIf="currUser && isAdmin" id="admin" (click)="deleteHandler()">Delete</a>
         </div>
     </div>
 </div>
 <br>
-<app-create *ngIf="toggleEdit" [isEdit]="isEdit"></app-create>
+<app-create *ngIf="toggleEdit" [isEdit]="true"></app-create>

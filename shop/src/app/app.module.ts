@@ -12,7 +12,7 @@ import { SharedModule } from './shared/shared.module'
 import { CoreModule } from './core/core.module';
 import { UserModule } from './user/user.module';
 import { ShopModule } from './shop/shop.module';
-import { AuthService } from './user/auth.service';
+import { UserService } from './user/user.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +28,7 @@ import { AuthService } from './user/auth.service';
     UserModule,
     ShopModule
   ],
-  providers: [AuthService],
+  providers: [UserService],
   bootstrap: [
     AppComponent,
   ]

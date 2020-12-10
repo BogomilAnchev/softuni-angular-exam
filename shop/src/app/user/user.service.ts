@@ -1,17 +1,15 @@
 import { Injectable, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { first } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class UserService {
 
-  constructor(public auth: AngularFireAuth) {
-  
+  constructor(public auth: AngularFireAuth, public fireStore: AngularFirestore) {
   }
-
-  getUser = this.auth.authState.pipe(first()).toPromise()
 
   authState = this.auth.onAuthStateChanged
 
@@ -25,6 +23,14 @@ export class AuthService {
 
   logout() {
     return this.auth.signOut();
+  }
+
+  setCart(email, newCart) {
+    return this.fireStore.collection('cart').doc(email).set({ cart: { cart: newCart } })
+  }
+
+  getCart(email) {
+    return this.fireStore.collection('cart').doc(email).get().toPromise()
   }
 
 }

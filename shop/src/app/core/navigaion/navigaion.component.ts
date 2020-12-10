@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/user/auth.service';
+import { UserService } from 'src/app/user/user.service';
 
 @Component({
   selector: 'app-navigaion',
@@ -12,8 +12,10 @@ export class NavigaionComponent {
   public currUser: string
   public isAdmin: boolean = false
 
-  constructor(public auth: AuthService, public router: Router) {
-    auth.authState(user => {
+
+  constructor(public user: UserService, public router: Router) {
+    
+    user.authState(user => {
       let email = user?.email    
       if (user) this.currUser = email;
       if (!user) this.currUser = undefined;
@@ -29,7 +31,7 @@ export class NavigaionComponent {
 
   async logoutHandler() {
     try {
-      await this.auth.logout()
+      await this.user.logout()
       this.router.navigate(['login'])
     } catch (err) {
       console.log(err);

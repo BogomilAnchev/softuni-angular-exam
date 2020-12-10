@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth.service';
+import { UserService } from '../user.service';
 
 function emailValidator(control: AbstractControl): ValidationErrors | null {
   const value = (control.value as string);
@@ -32,7 +32,7 @@ export class RegisterComponent {
   
   constructor(
     private fb: FormBuilder,
-    private auth: AuthService,
+    private auth: UserService,
     private router: Router
   ) {
 
@@ -56,6 +56,7 @@ export class RegisterComponent {
       await user.user.updateProfile({
         displayName: `${data.firstName} ${data.lastName}` 
       })
+      await this.auth.setCart(data.email, [])
       this.router.navigate([''])        
     } catch (err) {
       this.registerErr = err.message;     
