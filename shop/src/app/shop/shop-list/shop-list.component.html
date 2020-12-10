@@ -5,9 +5,9 @@
 <div class="layout">
     <div *ngFor="let prod of products" class="card">
 
-        <img src="https://www.silabg.com/uf/product/2945_pm_100protein.png">
+        <img src={{prod.info.imageUrl}}>
 
-        <h3>{{prod.info.name}}</h3>
+        <h3>{{prod.info.title}}</h3>
         <p class="price">{{prod.info.price}} $</p>
         <p><a routerLink="/details/{{prod.id}}">Details</a></p>
     </div>

@@ -1,8 +1,9 @@
 <app-loader [isLoading]="isLoading"></app-loader>
 
 <form *ngIf="!isLoading" [formGroup]="form" class="register" (ngSubmit)="submitHandler()">
-    <h2>Create new product Form</h2>
-    <div class="imgcontainer">
+    <h2 *ngIf="!isEdit">Create new product Form</h2>
+    <h2 *ngIf="isEdit">Edit product Form</h2>
+    <div *ngIf="!isEdit" class="imgcontainer">
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUtDqj2pE6xes1d3wMmJYGsRMeNOG_RZN-Sg&usqp=CAU" alt="Avatar" class="avatar">
     </div>
 
@@ -10,7 +11,7 @@
 
         <label for="title"><b>Title</b></label>
         <input [class.input-error]="form.get('title').touched && !!form.get('title').errors" type="title"
-            placeholder="Enter valid title" name="title" formControlName="title">
+            placeholder="Enter valid title" name="title" formControlName="title" value="dsadasdas">
         <div>
             <p *ngIf="form.get('title').touched && form.get('title').errors?.required" class="error">
                 *Title is required!
@@ -57,6 +58,7 @@
             </p>
         </div>
 
-        <button [disabled]="isLoading || form.invalid">Create new Product</button>      
+        <button *ngIf="!isEdit" [disabled]="isLoading || form.invalid">Create new Product</button>
+        <button *ngIf="isEdit" [disabled]="isLoading || form.invalid">Edit Product</button>       
     </div>
 </form>

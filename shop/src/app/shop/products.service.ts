@@ -17,4 +17,15 @@ export class ProductsService {
   getProduct(id: string) {
     return this.firestore.collection('products').doc(id).get().toPromise()
   }
+
+  createProduct(product) {
+    return this.firestore.collection('products').add(product);
+  }
+
+  deleteProduct(productId) {
+    this.firestore.doc('products/' + productId).delete();
+  }
+  updateProduct(productId, product) {
+    return this.firestore.doc('products/' + productId).update(product);
+  }
 }

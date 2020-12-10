@@ -1,4 +1,3 @@
-import { ThrowStmt } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -15,10 +14,9 @@ export class AdminGuard implements CanActivate {
   }
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     let isAdmin = 'bogomilanchev@gmail.com'
-    let currUser
-    this.auth.getUser.then(user => {
-      currUser = user.email
-      console.log(isAdmin, currUser);
+    let currUser = ''
+    this.auth.authState(user => {
+      currUser = user?.email
       isAdmin != currUser ? this.router.navigate(['']) : true
     })
     return true  

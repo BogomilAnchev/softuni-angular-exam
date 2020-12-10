@@ -1,15 +1,19 @@
-<div class="box">
-    <h1>{{product.name}}</h1>
-    <img class="cube" src="https://www.silabg.com/uf/product/2945_pm_100protein.png">
+<app-loader [isLoading]="isLoading"></app-loader>
+
+<div *ngIf="!isLoading" class="box">
+    <h1>{{product.title}}</h1>
+    <img src="{{product.imageUrl}}">
     <div class="details">
-        <p class="price"><span>Price:</span> {{product.price}} $</p>
-        <p class="desc"><span>Description:</span></p>
+        <p class="price">{{product.price}} $</p>
+        <div class="desc">{{product.description}}</div>
         <div class="btns">
-            <a routerLink="/">Back to main</a>
-            <a *ngIf="!currUser" class="btn" routerLink="/login">Login to buy</a>
-            <a *ngIf="currUser && !isAdmin" class="btn">Add to Card</a>
-            <a *ngIf="currUser && isAdmin" id="admin" routerLink="/Edit">Edit</a>
+            <a routerLink="/">Back to Main</a>
+            <a *ngIf="!currUser" class="btn" routerLink="/login">Login to Buy</a>
+            <a *ngIf="currUser && !isAdmin" class="btn">Add to Cart</a>
+            <a *ngIf="currUser && isAdmin" id="admin" (click)="edit()">Edit</a>
             <a *ngIf="currUser && isAdmin" id="admin" (click)="deleteHandler()">Delete</a>
         </div>
     </div>
 </div>
+<br>
+<app-create *ngIf="toggleEdit" [isEdit]="isEdit"></app-create>

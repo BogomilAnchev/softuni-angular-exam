@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/user/auth.service';
 import { ProductsService } from '../products.service';
 
@@ -11,14 +11,21 @@ import { ProductsService } from '../products.service';
 export class DetailsComponent implements OnInit {
 
   public product
-  public id: string
+  public productId: string
   public currUser: string
   public isAdmin: boolean = false
+  public isLoading: boolean = false
+  public isEdit: boolean = true
+  public toggleEdit: boolean = false
 
-  constructor(public productService: ProductsService, activatedRoute: ActivatedRoute, auth: AuthService) { 
+  constructor(
+    public productService: ProductsService,
+    public activatedRoute: ActivatedRoute,
+    public auth: AuthService,
+    public router: Router
+  ) {
 
-    this.id = activatedRoute.snapshot.params.id;
-    productService.getProduct(this.id).then(prod => this.product = prod.data());
+    this.productId = activatedRoute.snapshot.params.id;
 
     auth.authState(user => {
       let email = user.email
@@ -30,11 +37,22 @@ export class DetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.isLoading = true
+    this.productService
+      .getProduct(this.productId)
+      .then(prod => {
+        this.product = prod.data();
+        this.isLoading = false
+      })
+      .catch(err => console.log(err));
   }
 
   deleteHandler() {
-    console.log('delete');
-    
+    this.productService.deleteProduct(this.productId)
+    this.router.navigate([''])
+  }
+
+  edit() {
+    this.toggleEdit = !this.toggleEdit
   }
 }

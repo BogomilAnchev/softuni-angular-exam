@@ -7,8 +7,8 @@ import { first } from 'rxjs/operators';
 })
 export class AuthService {
 
-  constructor(private auth: AngularFireAuth) {
-
+  constructor(public auth: AngularFireAuth) {
+  
   }
 
   getUser = this.auth.authState.pipe(first()).toPromise()

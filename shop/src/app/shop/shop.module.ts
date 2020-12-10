@@ -23,10 +23,13 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule
   ],
   providers: [
-    ProductsService
+    ProductsService,
+    DetailsComponent
   ],
   exports: [
-    ShopListComponent
+    ShopListComponent,
+    CreateComponent,
+    DetailsComponent
   ]
 })
 export class ShopModule { }

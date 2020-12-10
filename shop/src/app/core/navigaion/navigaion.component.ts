@@ -14,9 +14,7 @@ export class NavigaionComponent {
 
   constructor(public auth: AuthService, public router: Router) {
     auth.authState(user => {
-      let email = user?.email
-      console.log(user);
-      
+      let email = user?.email    
       if (user) this.currUser = email;
       if (!user) this.currUser = undefined;
       if (email == 'bogomilanchev@gmail.com') {

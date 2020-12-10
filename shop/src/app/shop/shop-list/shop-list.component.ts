@@ -24,5 +24,7 @@ export class ShopListComponent implements OnInit{
         }
       })
     })
+    console.log(this.products);
+    
   }
 }

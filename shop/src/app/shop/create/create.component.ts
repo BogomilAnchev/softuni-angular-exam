@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
+import { DetailsComponent } from '../details/details.component';
+import { ProductsService } from '../products.service';
 
 function checkPrice(control: AbstractControl): ValidationErrors | null {
   let val = control.value;
@@ -24,20 +26,42 @@ function checkUrl(control: AbstractControl): ValidationErrors | null {
 })
 export class CreateComponent {
 
+  @Input() isEdit: boolean;
+  editProduct
+  editProductId
+
   form: FormGroup
   isLoading: boolean = false
 
-  constructor(fb: FormBuilder, router: RouterModule) {
+  constructor(
+    public fb: FormBuilder,
+    public router: Router,
+    public productService: ProductsService,
+    public detailsComp: DetailsComponent
+  ) {
+    this.editProduct = detailsComp.product
+    this.editProductId = detailsComp.productId
+
     this.form = fb.group({
-      title: ['', [Validators.required, Validators.minLength(6)]],
-      price: ['', [Validators.required, checkPrice]],
-      imageUrl: ['', [Validators.required, checkUrl]],
-      description: ['', [Validators.required, Validators.minLength(50)]]
+      title: [this.editProduct?.title || '', [Validators.required, Validators.minLength(6)]],
+      price: [this.editProduct?.price || '', [Validators.required, checkPrice]],
+      imageUrl: [this.editProduct?.imageUrl || '', [Validators.required, checkUrl]],
+      description: [this.editProduct?.description || '', [Validators.required, Validators.minLength(50)]]
     })
   }
 
   submitHandler() {
-    console.log(this.form.value);
-
+    if (!this.editProduct) {
+      this.productService.createProduct(this.form.value)
+        .then(res => {
+          this.router.navigate([''])
+        })
+        .catch(err => console.log(err))
+    } else {
+      this.productService.updateProduct(this.editProductId, this.form.value).then(res => {
+        this.router.navigate([''])
+      })
+        .catch(err => console.log(err))
+    }
   }
 }
