@@ -10,6 +10,9 @@
         <li *ngIf="currUser && isAdmin">
             <a id="admin" routerLink="/create">Create new product</a>
         </li>
+        <li>
+            <a id="hide" routerLink="/">#noStaticPages... except the forms but... shhh</a>
+        </li>
         <li *ngIf="!currUser" class="right">
             <a routerLink="/register">Register</a>
         </li>

@@ -3,7 +3,12 @@
 <div *ngIf="!isLoading" class="search">
     <input [value]="inputValue" (keyup)="inputHandler($event)">
 </div>
-<h2 *ngIf="!isLoading" (click)="search()" class="details">Search</h2>
+<div class="btns">
+    <h2 *ngIf="!isLoading" (click)="sort('asc')" class="details">Price Asc.</h2>
+    <h2 *ngIf="!isLoading" (click)="search()" class="details">Search</h2>
+    <h2 *ngIf="!isLoading" (click)="sort('desc')" class="details">Price Desc.</h2>
+</div>
+
 
 
 <div *ngIf="!isLoading" class="layout">

@@ -37,3 +37,14 @@ ul {
   #admin {
     color: lightsalmon
   }
+
+  #hide {
+    color: #333;
+    cursor: default;
+    font-size: 20px;
+  }
+
+  #hide:hover {
+    background-color: #333;
+    color: #444
+  }

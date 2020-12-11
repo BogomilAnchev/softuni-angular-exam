@@ -50,4 +50,10 @@ export class ShopListComponent implements OnInit {
   inputHandler(event: KeyboardEvent): void {
     this.inputValue = (event.target as any).value
   }
+
+  sort(type) {
+    this.products.sort((a, b) => {
+      return type == 'asc' ? +a.info.price - +b.info.price : +b.info.price - +a.info.price
+    })
+  }
 }
