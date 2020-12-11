@@ -3,14 +3,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { NewsComponent } from './shared/news/news.component';
 import { ShopListComponent } from './shop/shop-list/shop-list.component';
 import { LoginComponent } from './user/login/login.component';
-import { ProfileComponent } from './user/profile/profile.component';
+import { CartComponent } from './user/cart/cart.component';
 import { RegisterComponent } from './user/register/register.component';
 import { AngularFireAuthGuard, redirectLoggedInTo, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
 import { DetailsComponent } from './shop/details/details.component';
 import { CreateComponent } from './shop/create/create.component';
-import { map } from 'rxjs/operators';
 import { AdminGuard } from './shared/admin.guard';
+import { ProfileComponent } from './user/profile/profile.component';
 
 const redirectToLogin = () => redirectUnauthorizedTo(['login'])
 const redirectToHome = () => redirectLoggedInTo(['home'])
@@ -36,6 +36,12 @@ const routes: Routes = [
     component: LoginComponent,
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectToHome }
+  },
+  {
+    path: 'cart',
+    component: CartComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectToLogin }
   },
   {
     path: 'profile',

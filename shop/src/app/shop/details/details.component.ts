@@ -86,7 +86,7 @@ export class DetailsComponent implements OnInit {
  
     this.auth.setCart(this.currUser, currCart)
       .then(res => {
-        this.router.navigate(['profile'])
+        this.router.navigate(['cart'])
       })
       .catch(err => console.log(err));
   }

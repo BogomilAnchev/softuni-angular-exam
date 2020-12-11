@@ -21,7 +21,10 @@
             <a (click)="logoutHandler()">Logout</a>
         </li>
         <li *ngIf="currUser" class="right">
-            <a routerLink="/profile">Welcome, {{currUser}}</a>
+            <a routerLink="/cart">Shopping Cart</a>
+        </li>
+        <li *ngIf="currUser" class="right">
+            <a routerLink="/profile">Profile</a>
         </li>
     </ul>
 </nav>

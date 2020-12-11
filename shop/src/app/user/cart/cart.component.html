@@ -1,0 +1,33 @@
+<app-loader [isLoading]="isLoading"></app-loader>
+<h1 *ngIf="user?.email === 'bogomilanchev@gmail.com'">ADMINISTRATOR</h1>
+<h1 *ngIf="user?.email === 'bogomilanchev@gmail.com'">You dont deserve to buy... l 2 code 1st</h1>
+
+<div class="container" *ngIf="user?.email !== 'bogomilanchev@gmail.com'">
+    <h1>Hello {{user.names}}... check out your shopping cart!</h1>
+    <h1 *ngIf="total == 0">You cart is empty</h1>
+    <table *ngIf="total != 0">
+        <tr>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+        </tr>
+        <tr *ngFor="let prod of userCart?.cart?.cart">
+            <td><a class="title" routerLink="/details/{{prod.id}}">{{prod.title}}</a></td>
+            <td>{{prod.price}} $</td>
+            <td class="qty"><p class="inc" (click)="sub(prod.id)">sub</p><p>{{prod.qty}}</p><p class="inc" (click)="add(prod.id)">add</p></td>
+            <td>{{+prod.qty * +prod.price}} $</td>
+        </tr>
+        <tr *ngIf="userCart?.cart?.cart">
+            <td>--------</td>
+            <td>--------</td>
+            <td>--------</td>
+            <td class="total">{{total}} $</td>
+        </tr>
+    </table>
+    <div class="btns">
+        <a routerLink="/">Back to Main</a>
+        <a routerLink="/profile" (click)="order()">Order now</a>
+        <a (click)="clearCart()">Clear Cart</a>
+    </div>
+</div>
