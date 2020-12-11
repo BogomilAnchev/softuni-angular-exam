@@ -6,28 +6,48 @@ import { ProductsService } from '../products.service';
   templateUrl: './shop-list.component.html',
   styleUrls: ['./shop-list.component.css']
 })
-export class ShopListComponent implements OnInit, OnDestroy{
+export class ShopListComponent implements OnInit {
 
-  public products
-  public sub
+  public products: any
+  public inputValue: string = ''
+  public isLoading: boolean
 
   constructor(public productService: ProductsService) {
-       
+
   }
 
-  ngOnInit() {
-    this.sub = this.productService.getProducts().subscribe(data => {
-      this.products = data.map(item => {
-        let info = item.payload.doc.data();
-        return {
-          id: item.payload.doc.id,
-          info
-        }
+  getData(search) {
+    this.isLoading = true
+    this.productService.getProducts().toPromise().then(data => {
+      let arr = []
+      data.forEach(doc => {
+        let info = doc.data()
+        arr.push({
+          id: doc.id,
+          info: info
+        })
+
       })
+      if (search == '') {
+        this.products = arr
+      } else {
+        this.products = arr.filter(x => {
+          return x.info.title.toLowerCase().includes(search.toLowerCase())
+        })
+      }
+      this.isLoading = false
     })
   }
 
-  ngOnDestroy() {
-    this.sub.unsubscribe()
+  ngOnInit() {
+    this.getData('')
+  }
+
+  search() {
+    this.getData(this.inputValue)
+  }
+
+  inputHandler(event: KeyboardEvent): void {
+    this.inputValue = (event.target as any).value
   }
 }

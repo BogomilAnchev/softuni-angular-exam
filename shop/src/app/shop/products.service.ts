@@ -11,7 +11,7 @@ export class ProductsService {
   }
 
   getProducts() {
-    return this.firestore.collection('products').snapshotChanges();
+    return this.firestore.collection('products').get();
   }
 
   getProduct(id: string) {

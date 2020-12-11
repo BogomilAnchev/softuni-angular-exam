@@ -1,15 +1,18 @@
-<div class="search">
-    <input placeholder="Search items">
-</div>
+<app-loader [isLoading]="isLoading"></app-loader>
 
-<div class="layout">
+<div *ngIf="!isLoading" class="search">
+    <input [value]="inputValue" (keyup)="inputHandler($event)">
+</div>
+<h2 *ngIf="!isLoading" (click)="search()" class="details">Search</h2>
+
+
+<div *ngIf="!isLoading" class="layout">
     <div *ngFor="let prod of products" class="card">
 
-        <img src={{prod.info.imageUrl}}>
+        <img routerLink="/details/{{prod.id}}" src={{prod.info.imageUrl}}>
 
         <h3>{{prod.info.title}}</h3>
-        <p class="price">{{prod.info.price}} $</p>
+        <p class="price">{{(+prod.info.price).toFixed(2)}} $</p>
         <p><a routerLink="/details/{{prod.id}}">Details</a></p>
     </div>
-    <div class="card">
 </div>
