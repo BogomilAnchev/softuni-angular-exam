@@ -16,8 +16,8 @@
             <p *ngIf="form.get('title').touched && form.get('title').errors?.required" class="error">
                 *Title is required!
             </p>
-            <p *ngIf="form.get('title').touched && form.get('title').errors?.minlength" class="error">
-                *Title should be at least 6 chars long!
+            <p *ngIf="form.get('title').touched && form.get('title').errors?.minlength || form.get('title').errors?.maxlength" class="error">
+                *Title should be between 6 and 18 chars long!
             </p>
         </div>
 

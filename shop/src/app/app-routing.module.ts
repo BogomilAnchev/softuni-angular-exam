@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { NewsComponent } from './shared/news/news.component';
 import { ShopListComponent } from './shop/shop-list/shop-list.component';
 import { LoginComponent } from './user/login/login.component';
 import { CartComponent } from './user/cart/cart.component';
@@ -48,10 +47,6 @@ const routes: Routes = [
     component: ProfileComponent,
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectToLogin }
-  },
-  {
-    path: 'news',
-    component: NewsComponent
   },
   {
     path: 'details/:id',

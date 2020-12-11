@@ -57,6 +57,7 @@ export class RegisterComponent {
         displayName: `${data.firstName} ${data.lastName}` 
       })
       await this.auth.setCart(data.email, [])
+      await this.auth.setOrders(data.email, [])
       this.router.navigate([''])        
     } catch (err) {
       this.registerErr = err.message;     

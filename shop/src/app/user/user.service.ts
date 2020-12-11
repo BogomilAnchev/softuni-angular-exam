@@ -28,11 +28,19 @@ export class UserService {
   }
 
   setCart(email, newCart) {
-    return this.fireStore.collection('cart').doc(email).set({ cart: { cart: newCart } })
+    return this.fireStore.collection('cart').doc(email).set({ cart: newCart })
   }
 
   getCart(email) {
     return this.fireStore.collection('cart').doc(email).get().toPromise()
+  }
+
+  setOrders(email, newOrders) {
+    return this.fireStore.collection('orders').doc(email).set({ orders: newOrders })
+  }
+
+  getOrders(email) {
+    return this.fireStore.collection('orders').doc(email).get().toPromise()
   }
 
 }

@@ -1,10 +1,12 @@
 <app-loader [isLoading]="isLoading"></app-loader>
 <h1 *ngIf="user?.email === 'bogomilanchev@gmail.com'">ADMINISTRATOR</h1>
-<h1 *ngIf="user?.email === 'bogomilanchev@gmail.com'">You dont deserve to buy... l 2 code 1st</h1>
+<h1 *ngIf="user?.email === 'bogomilanchev@gmail.com'">You dont deserve to buy anything... l 2 code 1st</h1>
 
 <div class="container" *ngIf="user?.email !== 'bogomilanchev@gmail.com'">
-    <h1>Hello {{user.names}}... check out your shopping cart!</h1>
-    <h1 *ngIf="total == 0">You cart is empty</h1>
+    <h1 *ngIf="!successOrder">Hello {{user.names}}... check out your shopping cart!</h1>
+    <h1>--------------------------------------------------</h1>
+    <h1 *ngIf="total == 0 && !successOrder">You cart is empty</h1>
+    <h1 *ngIf="successOrder">Order successfull!</h1>
     <table *ngIf="total != 0">
         <tr>
             <th>Title</th>
@@ -12,22 +14,22 @@
             <th>Quantity</th>
             <th>Total</th>
         </tr>
-        <tr *ngFor="let prod of userCart?.cart?.cart">
+        <tr *ngFor="let prod of userCart">
             <td><a class="title" routerLink="/details/{{prod.id}}">{{prod.title}}</a></td>
-            <td>{{prod.price}} $</td>
+            <td>{{(+prod.price).toFixed(2)}} $</td>
             <td class="qty"><p class="inc" (click)="sub(prod.id)">sub</p><p>{{prod.qty}}</p><p class="inc" (click)="add(prod.id)">add</p></td>
-            <td>{{+prod.qty * +prod.price}} $</td>
+            <td>{{(+prod.qty * +prod.price).toFixed(2)}} $</td>
         </tr>
-        <tr *ngIf="userCart?.cart?.cart">
+        <tr *ngIf="userCart">
             <td>--------</td>
             <td>--------</td>
             <td>--------</td>
-            <td class="total">{{total}} $</td>
+            <td class="total">{{total.toFixed(2)}} $</td>
         </tr>
     </table>
-    <div class="btns">
+    <div *ngIf="total != 0" class="btns">
         <a routerLink="/">Back to Main</a>
-        <a routerLink="/profile" (click)="order()">Order now</a>
+        <a (click)="order()">Order now</a>
         <a (click)="clearCart()">Clear Cart</a>
     </div>
 </div>

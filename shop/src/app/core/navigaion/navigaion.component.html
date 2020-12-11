@@ -4,8 +4,8 @@
         <li>
             <a routerLink="/">Home</a>
         </li>
-        <li>
-            <a routerLink="/news">News</a>
+        <li *ngIf="currUser">
+            <a routerLink="/profile">Welcome, {{currUser}}</a>
         </li>
         <li *ngIf="currUser && isAdmin">
             <a id="admin" routerLink="/create">Create new product</a>
@@ -20,10 +20,10 @@
         <li *ngIf="currUser" class="right">
             <a (click)="logoutHandler()">Logout</a>
         </li>
-        <li *ngIf="currUser" class="right">
+        <li *ngIf="currUser && !isAdmin" class="right">
             <a routerLink="/cart">Shopping Cart</a>
         </li>
-        <li *ngIf="currUser" class="right">
+        <li *ngIf="currUser && !isAdmin" class="right">
             <a routerLink="/profile">Profile</a>
         </li>
     </ul>

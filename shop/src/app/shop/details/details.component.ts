@@ -34,7 +34,8 @@ export class DetailsComponent implements OnInit {
         this.auth
           .getCart(this.currUser)
           .then(cart => {
-            this.userCart = cart.data()
+            let data: any = cart.data()
+            this.userCart = data.cart
           })
           .catch(err => console.log(err));
       }
@@ -72,7 +73,7 @@ export class DetailsComponent implements OnInit {
 
   addToCart() {
     let currProdId = this.productId;
-    let currCart = this.userCart.cart.cart
+    let currCart = this.userCart
 
     let indexIfExisting = currCart.findIndex(prod => prod.id == currProdId)
 

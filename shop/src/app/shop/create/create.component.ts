@@ -43,7 +43,7 @@ export class CreateComponent {
     this.editProductId = detailsComp.productId
 
     this.form = fb.group({
-      title: [this.editProduct?.title || '', [Validators.required, Validators.minLength(6)]],
+      title: [this.editProduct?.title || '', [Validators.required, Validators.minLength(6), Validators.maxLength(18)]],
       price: [this.editProduct?.price || '', [Validators.required, checkPrice]],
       imageUrl: [this.editProduct?.imageUrl || '', [Validators.required, checkUrl]],
       description: [this.editProduct?.description || '', [Validators.required, Validators.minLength(50)]]
