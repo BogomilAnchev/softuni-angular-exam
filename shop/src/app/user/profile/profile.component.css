@@ -26,6 +26,12 @@ h1 {
     cursor: pointer;
     padding: 10px;
 }
+
+.details.btn:hover {
+    border: 3 solid black;
+    background-color: black;
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 1);
+}
 table {
     margin: 0 auto;
     width: 80%;

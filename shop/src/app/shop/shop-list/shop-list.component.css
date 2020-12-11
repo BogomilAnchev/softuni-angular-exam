@@ -7,13 +7,19 @@
     border: 2px solid  #333;
     border-radius: 11px;
     margin: 5px;
+    cursor: pointer;
+  }
+
+  .card:hover {
+    border: 3px solid black;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 1);
   }
 
   img {
       max-width: 200px;
       max-height: 250px;
       margin: 10px;
-      cursor: pointer;
+      
   }
   
   .price {
@@ -57,13 +63,24 @@
     border-radius: 5px;
   }
 
+  input:hover {
+    border: 3 solid black;
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 1);
+  }
+
   .search {
     display: flex;
     margin-bottom: 20px;
     margin-top: 20px;
-}
+  }
 
-a {
+  .details:hover {
+    border: 3 solid black;
+    background-color: black;
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 1);
+  }
+
+  a {
   display: block;
   font-size: larger;
   background-color: #333;
@@ -74,8 +91,9 @@ a {
   padding: 5px 8px;
   text-decoration: none;
   cursor: pointer;
-}
-.details {
+  }
+
+  .details {
   border: 1px solid black;
   border-radius: 5px;
   background-color: #333;
@@ -85,4 +103,4 @@ a {
   text-align: center;
   width: 10%;
   margin: 0 auto;
-}
+  }

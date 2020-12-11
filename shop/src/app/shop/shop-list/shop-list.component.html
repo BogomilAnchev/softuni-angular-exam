@@ -7,9 +7,9 @@
 
 
 <div *ngIf="!isLoading" class="layout">
-    <div *ngFor="let prod of products" class="card">
+    <div routerLink="/details/{{prod.id}}" *ngFor="let prod of products" class="card">
 
-        <img routerLink="/details/{{prod.id}}" src={{prod.info.imageUrl}}>
+        <img src={{prod.info.imageUrl}}>
 
         <h3>{{prod.info.title}}</h3>
         <p class="price">{{(+prod.info.price).toFixed(2)}} $</p>

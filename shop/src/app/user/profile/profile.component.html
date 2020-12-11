@@ -10,7 +10,7 @@
             <h2>Order No: {{i + 1}}</h2>
             <h2>{{order.date}}</h2>
             <h2>Total Amount: {{order.total}} $</h2>
-            <h2 (click)="toggleDetails(i)" class="details">Details</h2>
+            <h2 (click)="toggleDetails(i)" class="details btn">Details</h2>
         </div>
         <div *ngIf="detailsToShowMapping[i]" class="details">
             <table>

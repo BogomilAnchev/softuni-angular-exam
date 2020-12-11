@@ -28,6 +28,7 @@ ul {
   
   li a:hover:not(.active) {
     background-color: #111;
+    font-size: 22px;
   }
   .right {
       float: right;
