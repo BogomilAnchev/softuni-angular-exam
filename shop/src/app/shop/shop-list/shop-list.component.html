@@ -1,18 +1,23 @@
 <app-loader [isLoading]="isLoading"></app-loader>
 
-<div *ngIf="!isLoading" class="search">
-    <input [value]="inputValue" (keyup)="inputHandler($event)">
+<div *ngIf="!isLoading">
+    <div class="search">
+        <input [value]="inputValue" (keyup)="inputHandler($event)">
+    </div>
+    <div class="btns">
+        <h2 (click)="sort('asc')" class="details">Price Asc.</h2>
+        <h2 (click)="search()" class="details">Search</h2>
+        <h2 (click)="sort('desc')" class="details">Price Desc.</h2>
+    </div>
+    <div class="btns">
+        <h2 (click)="prev()" [class.disabled]="from == 0" class="details">Prev Page</h2>
+        <div *ngFor="let page of pages; index as i">
+            <h2 [class.disabled]="to / (i + 1) == 5" (click)="takePage($event)" id="pages" class="details">{{i + 1}}</h2>
+        </div>
+        <h2 (click)="next()" [class.disabled]="to >= allProds.length" class="details">Next Page</h2>
+    </div>
 </div>
-<div class="btns">
-    <h2 *ngIf="!isLoading" (click)="sort('asc')" class="details">Price Asc.</h2>
-    <h2 *ngIf="!isLoading" (click)="search()" class="details">Search</h2>
-    <h2 *ngIf="!isLoading" (click)="sort('desc')" class="details">Price Desc.</h2>
-</div>
-<div class="pages">
-    <h2 *ngIf="!isLoading" (click)="prev()" [class.disabled]="from == 0" class="details">Prev Page</h2> 
-    <h2 *ngIf="!isLoading" (click)="next()" [class.disabled]="to >= allProds.length" class="details">Next Page</h2>
-    
-</div>
+
 
 
 

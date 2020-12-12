@@ -13,8 +13,10 @@ export class ShopListComponent implements OnInit {
   public inputValue: string = ''
   public isLoading: boolean
 
-  public from: number = 0
-  public to: number = 4
+  public from: number
+  public to: number
+  public pages: any
+  public currPage: number = 1
 
   constructor(public productService: ProductsService) {
 
@@ -30,7 +32,6 @@ export class ShopListComponent implements OnInit {
           id: doc.id,
           info: info
         })
-
       })
       if (search == '') {
         this.allProds = arr
@@ -42,6 +43,11 @@ export class ShopListComponent implements OnInit {
       this.from = 0;
       this.to = 5
       this.products = this.allProds.slice(this.from, this.to)
+
+      let pagesArr = []
+      pagesArr.length = Math.ceil((this.allProds.length) / 5)
+      this.pages = pagesArr.fill(1)
+
       this.isLoading = false
     })
   }
@@ -78,6 +84,21 @@ export class ShopListComponent implements OnInit {
     if (this.from == 0) { return; }
     this.from = this.from - 5;
     this.to = this.to - 5;
+    this.products = this.allProds.slice(this.from, this.to)
+  }
+
+  takePage(event: Event) {
+    let target = event.target as HTMLElement;
+    this.currPage = +target.innerHTML;
+
+    if (this.currPage == 1) {
+      this.from = 0;
+      this.to = 5;
+    } else {
+      this.from = (this.currPage - 1) * 5
+      this.to = this.currPage * 5
+    }
+
     this.products = this.allProds.slice(this.from, this.to)
   }
 }
