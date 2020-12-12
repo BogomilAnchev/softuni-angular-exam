@@ -8,9 +8,13 @@ import { ProductsService } from '../products.service';
 })
 export class ShopListComponent implements OnInit {
 
+  public allProds: any
   public products: any
   public inputValue: string = ''
   public isLoading: boolean
+
+  public from: number = 0
+  public to: number = 4
 
   constructor(public productService: ProductsService) {
 
@@ -29,12 +33,15 @@ export class ShopListComponent implements OnInit {
 
       })
       if (search == '') {
-        this.products = arr
+        this.allProds = arr
       } else {
-        this.products = arr.filter(x => {
+        this.allProds = arr.filter(x => {
           return x.info.title.toLowerCase().includes(search.toLowerCase())
         })
       }
+      this.from = 0;
+      this.to = 5
+      this.products = this.allProds.slice(this.from, this.to)
       this.isLoading = false
     })
   }
@@ -52,8 +59,25 @@ export class ShopListComponent implements OnInit {
   }
 
   sort(type) {
-    this.products.sort((a, b) => {
+    this.allProds.sort((a, b) => {
       return type == 'asc' ? +a.info.price - +b.info.price : +b.info.price - +a.info.price
     })
+    this.from = 0;
+    this.to = 5
+    this.products = this.allProds.slice(this.from, this.to)
+  }
+
+  next() {
+    if (this.to >= this.allProds.length) { return; }
+    this.from = this.from + 5;
+    this.to = this.to + 5
+    this.products = this.allProds.slice(this.from, this.to)
+  }
+
+  prev() {
+    if (this.from == 0) { return; }
+    this.from = this.from - 5;
+    this.to = this.to - 5;
+    this.products = this.allProds.slice(this.from, this.to)
   }
 }

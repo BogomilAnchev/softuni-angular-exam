@@ -43,7 +43,7 @@ export class NavigaionComponent implements OnInit {
     }
   }
 
-  /* ngOnDestroy() {
+  ngOnDestroy() {
     this.sub.unsubscribe()
-  } */
+  }
 }

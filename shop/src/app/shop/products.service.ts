@@ -22,11 +22,11 @@ export class ProductsService {
     return this.firestore.collection('products').add(product);
   }
 
-  deleteProduct(productId) {
+  deleteProduct(productId: string) {
     this.firestore.doc('products/' + productId).delete();
   }
   
-  updateProduct(productId, product) {
+  updateProduct(productId: string, product) {
     return this.firestore.doc('products/' + productId).update(product);
   }
 }

@@ -8,6 +8,11 @@
     <h2 *ngIf="!isLoading" (click)="search()" class="details">Search</h2>
     <h2 *ngIf="!isLoading" (click)="sort('desc')" class="details">Price Desc.</h2>
 </div>
+<div class="pages">
+    <h2 *ngIf="!isLoading" (click)="prev()" [class.disabled]="from == 0" class="details">Prev Page</h2> 
+    <h2 *ngIf="!isLoading" (click)="next()" [class.disabled]="to >= allProds.length" class="details">Next Page</h2>
+    
+</div>
 
 
 
