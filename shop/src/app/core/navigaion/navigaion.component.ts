@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { UserService } from 'src/app/user/user.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class NavigaionComponent implements OnInit {
 
   public currUser: string
   public isAdmin: boolean = false
-  public sub
+  public sub: Promise<any>
 
 
   constructor(public user: UserService, public router: Router) {
@@ -20,7 +21,7 @@ export class NavigaionComponent implements OnInit {
       let email = user?.email    
       if (user) this.currUser = email;
       if (!user) this.currUser = undefined;
-      if (email == 'bogomilanchev@gmail.com') {
+      if (email == 'admin@gmail.com') {
         this.currUser = 'Administrator!!!'
         this.isAdmin = true
       } else {
@@ -41,9 +42,5 @@ export class NavigaionComponent implements OnInit {
     } catch (err) {
       console.log(err);
     }
-  }
-
-  ngOnDestroy() {
-    this.sub.unsubscribe()
   }
 }

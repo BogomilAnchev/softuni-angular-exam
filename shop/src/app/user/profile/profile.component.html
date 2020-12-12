@@ -1,7 +1,7 @@
-<h1 *ngIf="user?.email === 'bogomilanchev@gmail.com'">ADMINISTRATOR</h1>
-<h1 *ngIf="user?.email === 'bogomilanchev@gmail.com'">You dont deserve to buy anything... l 2 code 1st</h1>
+<h1 *ngIf="user?.email === 'admin@gmail.com'">ADMINISTRATOR</h1>
+<h1 *ngIf="user?.email === 'admin@gmail.com'">You dont deserve to buy anything... l 2 code 1st</h1>
 
-<div *ngIf="user?.email !== 'bogomilanchev@gmail.com'" class="container">
+<div *ngIf="user?.email !== 'admin@gmail.com'" class="container">
     <h1>Hello {{user.names}}... below you can check out your orders!</h1>
     <h1>--------------------------------------------------</h1>
     <h1 *ngIf="orders?.length == 0">No orders to show</h1>

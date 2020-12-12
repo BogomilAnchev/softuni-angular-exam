@@ -9,7 +9,7 @@ import { UserService } from '../user.service';
 })
 export class CartComponent {
 
-  public userCart: any
+  public userCart: any[]
   public user: { email: string, names: string }
   public isLoading: boolean = false
   public total: number = 0
@@ -22,7 +22,7 @@ export class CartComponent {
           email: user.email,
           names: user.displayName
         }
-        if (this.user.email == 'bogomilanchev@gmail.com') { return ;}
+        if (this.user.email == 'bogomilanchev@gmail.com') { return; }
         this.isLoading = true
         this.userService
           .getCart(this.user.email)

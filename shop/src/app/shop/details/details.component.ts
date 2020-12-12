@@ -10,13 +10,13 @@ import { ProductsService } from '../products.service';
 })
 export class DetailsComponent implements OnInit {
 
-  public product
+  public product: any
   public productId: string
   public currUser: string
   public isAdmin: boolean = false
   public isLoading: boolean = false
   public toggleEdit: boolean = false
-  public userCart
+  public userCart: any[]
 
   constructor(
     public productService: ProductsService,
@@ -45,7 +45,7 @@ export class DetailsComponent implements OnInit {
         this.currUser = undefined
       }
 
-      email == 'bogomilanchev@gmail.com' ? this.isAdmin = true : this.isAdmin = false
+      email == 'admin@gmail.com' ? this.isAdmin = true : this.isAdmin = false
 
     })
   }

@@ -7,7 +7,6 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 export class ProductsService {
 
   constructor(private firestore: AngularFirestore) {
-
   }
 
   getProducts() {

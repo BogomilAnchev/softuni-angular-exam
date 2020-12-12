@@ -10,8 +10,8 @@ export class ProfileComponent {
 
   public user: { email: string, names: string }
   public isLoading: boolean = false
-  public orders: any
-  public detailsToShowMapping: any
+  public orders: any[]
+  public detailsToShowMapping: any[]
   public details: boolean = false
 
   constructor(public userService: UserService) {
@@ -21,7 +21,7 @@ export class ProfileComponent {
           email: user.email,
           names: user.displayName
         }
-        if (this.user.email == 'bogomilanchev@gmail.com') { return ;}
+        if (this.user.email == 'admin@gmail.com') { return ;}
         this.isLoading = true
         this.userService
           .getOrders(this.user.email)

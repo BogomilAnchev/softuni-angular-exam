@@ -8,14 +8,14 @@ import { ProductsService } from '../products.service';
 })
 export class ShopListComponent implements OnInit {
 
-  public allProds: any
-  public products: any
+  public allProds: any[]
+  public products: any[]
   public inputValue: string = ''
   public isLoading: boolean
 
   public from: number
   public to: number
-  public pages: any
+  public pages: any[]
   public currPage: number = 1
 
   constructor(public productService: ProductsService) {

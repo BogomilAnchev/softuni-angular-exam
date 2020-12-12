@@ -18,8 +18,8 @@ function emailValidator(control: AbstractControl): ValidationErrors | null {
 })
 export class LoginComponent {
 
-  isLoading = false;
-  loginErr = undefined;
+  public isLoading: boolean = false;
+  public loginErr: string = undefined;
 
   form: FormGroup;
 

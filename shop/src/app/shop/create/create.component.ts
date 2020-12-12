@@ -27,8 +27,8 @@ function checkUrl(control: AbstractControl): ValidationErrors | null {
 export class CreateComponent {
 
   @Input() isEdit: boolean;
-  editProduct
-  editProductId
+  editProduct: any
+  editProductId: string
 
   form: FormGroup
   isLoading: boolean = false

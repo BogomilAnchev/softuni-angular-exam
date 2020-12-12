@@ -1,8 +1,8 @@
 <app-loader [isLoading]="isLoading"></app-loader>
-<h1 *ngIf="user?.email === 'bogomilanchev@gmail.com'">ADMINISTRATOR</h1>
-<h1 *ngIf="user?.email === 'bogomilanchev@gmail.com'">You dont deserve to buy anything... l 2 code 1st</h1>
+<h1 *ngIf="user?.email === 'admin@gmail.com'">ADMINISTRATOR</h1>
+<h1 *ngIf="user?.email === 'admin@gmail.com'">You dont deserve to buy anything... l 2 code 1st</h1>
 
-<div class="container" *ngIf="user?.email !== 'bogomilanchev@gmail.com'">
+<div class="container" *ngIf="user?.email !== 'admin@gmail.com'">
     <h1 *ngIf="!successOrder">Hello {{user.names}}... check out your shopping cart!</h1>
     <h1>--------------------------------------------------</h1>
     <h1 *ngIf="total == 0 && !successOrder">You cart is empty</h1>

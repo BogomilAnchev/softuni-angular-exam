@@ -25,10 +25,10 @@ function rePasswordValidatorFactory(targetControl: AbstractControl): ValidatorFn
 })
 export class RegisterComponent {
 
-  form: FormGroup;
+  public form: FormGroup;
 
-  isLoading = false;
-  registerErr = undefined;
+  public isLoading: boolean = false;
+  public registerErr: string = undefined;
   
   constructor(
     private fb: FormBuilder,
